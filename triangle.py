@@ -22,7 +22,7 @@ class Triangle(object):
         wu = w.crossProduct(self.u)
         r = dv.scalarProduct(w) / dvu
         s = wu.scalarProduct(ray.direction) / dvu
-        if 0<=r and r <=1 and 0<=s and <=1 and (r+s) <= 1:
+        if (0<=r) and (r <=1) and (0<=s) and (s<=1) and (r+s) <= 1:
             return wu.scalarProduct(self.v) / dvu
         else:
             return None

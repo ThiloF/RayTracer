@@ -3,6 +3,7 @@ from PIL import Image
 from vector import Vector
 from ray import Ray
 from point import Point
+from sphere import Sphere
 import math
 
 HEIGHT = 400
@@ -38,6 +39,7 @@ if __name__ == "__main__":
     w = Vector(2,2,2)
     n = v + w
     ray = Ray(Point(0,0,0), Vector(10,0,0))
-    print(ray.pointAtParameter(10))
+    s = Sphere(2,4)
+    print(s)
 
 

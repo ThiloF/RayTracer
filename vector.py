@@ -16,11 +16,11 @@ class Vector(object):
     def length(self):
         return math.sqrt(self.x**2 + self.y**2 + self.z**2)
 
-    def scalarProduct(self, v):
-        x = self.x * v.x
-        y = self.y * v.y
-        z = self.z * v.z
-        return Vector(x,y,z)
+    def __mul__(self, other):
+        x = self.x * other.x
+        y = self.y * other.y
+        z = self.z * other.z
+        return x + y + z
 
     def __add__(self, other):
         x = self.x + other.x
@@ -36,3 +36,9 @@ class Vector(object):
         y = self.z * direction.x - direction.z * self.x
         z = self.x * direction.y - direction.x * self.y
         return Vector(x,y,z)
+
+    def __sub__(self, other):
+        x = self.x - other.x
+        y = self.y - other.y
+        z = self.z - other.z
+        return Vector(x, y, z)

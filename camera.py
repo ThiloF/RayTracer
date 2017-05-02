@@ -21,10 +21,21 @@ class Camera(object):
         for x in range(self.width):
             for y in range(self.height):
                 ray = self.calcRay(x,y)
+                maxdist = float('inf')
+                color = (255,0,0)
+                for o in self.objectlist:
+                    hitdist = o.intersectionParameter(ray)
+                    if hitdist:
+                        if hitdist < maxdist:
+                            maxdist = hitdist
+                            color = o.colorAt(ray)
+                self.image.putPixel((x,y), color)
 
 
     def calcRay(self,x,y):
-        return None
+        xcomp = self.s.scale(x * self.width - self.width / 2)
+        ycomp = self.u.scale(y * self.height - self.height / 2)
+        return Ray(self.e, self.f + xcomp + ycomp)
 
     def calcF(self, c, e):
         return (c - e) / (c - e).length()
