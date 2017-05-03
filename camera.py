@@ -40,7 +40,7 @@ class Camera(object):
                     hitdist = o.intersectionParameter(ray)
                     #print(hitdist)
                     if hitdist:
-                        if hitdist < maxdist:
+                        if 0.01 < hitdist < maxdist:
                             maxdist = hitdist
                             color = o.colorAt(ray)
                             #print(color)

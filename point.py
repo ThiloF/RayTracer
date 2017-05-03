@@ -20,6 +20,12 @@ class Point(object):
         z = self.z - other.z
         return Vector(x, y, z)
 
+    def __mul__(self, other):
+        x = self.x * other.x
+        y = self.y * other.y
+        z = self.z * other.z
+        return x + y + z
+
     # def scalarProduct(self,other):
     #     x = self.x * other.x
     #     y = self.y * other.y

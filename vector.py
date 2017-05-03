@@ -7,6 +7,8 @@ class Vector(object):
         self.z = z
 
     def normalized(self):
+        if self.length() == 0:
+            return 0
         k = 1.0 / self.length() #kehrwert
         return self.scale(k)
 
