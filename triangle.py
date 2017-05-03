@@ -3,12 +3,13 @@ from point import Point
 from ray import Ray
 
 class Triangle(object):
-    def __init__(self,a,b,c):
+    def __init__(self,a,b,c,color):
         self.a = a #point
         self.b = b #point
         self.c = c #point
-        self.u = self.a - self.b # direction vector
+        self.u = self.b - self.a # direction vector
         self.v = self.c - self.a # direction vector
+        self.color = color
 
     def __repr__(self):
         return "Triangle(%s,%s,%s)" % (repr(self.a), repr(self.b), repr(self.c))
@@ -16,16 +17,19 @@ class Triangle(object):
     def intersectionParameter(self, ray):
         w = ray.origin - self.a
         dv = ray.direction.crossProduct(self.v)
-        dvu = dv.scalarProduct(self.u)
+        dvu = dv * self.u
         if dvu == 0.0:
             return None
         wu = w.crossProduct(self.u)
-        r = dv.scalarProduct(w) / dvu
-        s = wu.scalarProduct(ray.direction) / dvu
+        r = dv * w / dvu
+        s = wu * ray.direction / dvu
         if (0<=r) and (r <=1) and (0<=s) and (s<=1) and (r+s) <= 1:
-            return wu.scalarProduct(self.v) / dvu
+            return wu * self.v / dvu
         else:
             return None
 
-        def normalAt(self,p):
-            return self.u.crossPrdoduct(self.v).normalized()
+    def normalAt(self,p):
+        return self.u.crossPrdoduct(self.v).normalized()
+
+    def colorAt(self, ray):
+        return self.color
